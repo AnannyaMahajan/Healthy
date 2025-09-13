@@ -1,30 +1,43 @@
 import React from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import ProblemStatement from "./components/ProblemStatement";
-import ReportForm from "./components/ReportForm";
-import WaterForm from "./components/WaterForm";
-import Dashboard from "./components/Dashboard";
-import AIChat from "./components/AIChat";
-import Footer from "./components/Footer";
+import { useTranslation } from "react-i18next";
+import "./i18n";
 
-export default function App() {
+function App() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        <Hero />
-        <div className="max-w-6xl mx-auto px-6">
-          <ProblemStatement />
-          <div className="grid md:grid-cols-2 gap-8 my-12">
-            <ReportForm />
-            <WaterForm />
-          </div>
-          <AIChat />
-          <Dashboard />
-        </div>
-      </main>
-      <Footer />
+    <div className="p-6">
+      {/* Using translations instead of plain text */}
+      <h1 className="text-3xl font-bold">{t("welcome")}</h1>
+      <p className="text-lg text-gray-600">{t("tagline")}</p>
+
+      {/* Language Switcher */}
+      <div className="mt-4 flex gap-3">
+        <button
+          onClick={() => changeLanguage("en")}
+          className="px-3 py-1 bg-blue-500 text-white rounded"
+        >
+          English
+        </button>
+        <button
+          onClick={() => changeLanguage("hi")}
+          className="px-3 py-1 bg-green-500 text-white rounded"
+        >
+          हिंदी
+        </button>
+        <button
+          onClick={() => changeLanguage("as")}
+          className="px-3 py-1 bg-purple-500 text-white rounded"
+        >
+          অসমীয়া
+        </button>
+      </div>
     </div>
   );
 }
+
+export default App;
